@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Calculator</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('https://static.vecteezy.com/system/resources/previews/005/421/417/large_2x/maths-symbols-icon-set-algebra-or-mathematics-subject-doodle-design-education-and-study-concept-back-to-school-background-for-notebook-not-pad-sketchbook-hand-drawn-illustration-vector.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+    /* Dark overlay for readability */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    /* Math symbols background text */
+    body::before {
+      content: '√ ÷ × + − π % ^ = ( )';
+      position: fixed;
+      top: 0;
+      left: 0;
+      font-size: 180px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.05);
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: 50px;
+      transform: rotate(-15deg);
+    }
+
+    .title {
+      text-align: center;
+      color: #ffffff;
+      font-size: 36px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px #000;
+      z-index: 2;
+      position: relative;
+    }
+
+    .calculator {
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      width: 320px;
+      margin: 0 auto 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    #display {
+      width: 100%;
+      height: 60px;
+      font-size: 24px;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      text-align: right;
+      background: #000;
+      color: #fff;
+      border-radius: 8px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .operator {
+      background: #ff9800;
+    }
+
+    .operator:hover {
+      background: #e68a00;
+    }
+
+    .equal {
+      background: #4caf50;
+    }
+
+    .equal:hover {
+      background: #449d48;
+    }
+
+    .clear {
+      background: #e53935;
+    }
+
+    .clear:hover {
+      background: #c62828;
+    }
+
+    .special {
+      background: #607d8b;
+    }
+
+    .special:hover {
+      background: #546e7a;
+    }
+  </style>
+</head>
+<body>
+
+<h1 class="title">Online Calculator</h1>
+
+<div class="calculator">
+  <input type="text" id="display" readonly>
+  <div class="buttons">
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button class="operator" onclick="append('/')">÷</button>
+
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button class="operator" onclick="append('*')">×</button>
+
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button class="operator" onclick="append('-')">−</button>
+
+    <button onclick="append('0')">0</button>
+    <button onclick="append('.')">.</button>
+    <button class="equal" onclick="calculate()">=</button>
+    <button class="operator" onclick="append('+')">+</button>
+
+    <button class="special" onclick="append('%')">%</button>
+    <button class="special" onclick="append('**')">^</button>
+    <button class="special" onclick="sqrt()">√</button>
+    <button class="special" onclick="append('3.1416')">π</button>
+
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button class="special" onclick="backspace()">⌫</button>
+    <button class="special" onclick="negate()">±</button>
+    <button class="special" onclick="append('(')">(</button>
+    <button class="special" onclick="append(')')">)</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById("display");
+
+  function append(value) {
+    display.value += value;
+  }
+
+  function clearDisplay() {
+    display.value = "";
+  }
+
+  function backspace() {
+    display.value = display.value.slice(0, -1);
+  }
+
+  function sqrt() {
+    try {
+      display.value = Math.sqrt(eval(display.value));
+    } catch {
+      display.value = "Error";
+    }
+  }
+
+  function negate() {
+    try {
+      display.value = eval(display.value) * -1;
+    } catch {
+      display.value = "Error";
+    }
+  }
+
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch (e) {
+      display.value = "Error";
+    }
+  }
+</script>
+
+</body>
+</html>
